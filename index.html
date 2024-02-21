@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Before Leaving</title>
+    <script type="text/javascript">
+        window.addEventListener('beforeunload', function (e) {
+            var confirmationMessage = 'このページを離れますか？';
+            (e || window.event).returnValue = confirmationMessage;
+            return confirmationMessage;
+        });
+    </script>
+</head>
+<body>
+    <p>ページから離れようとすると、確認ダイアログが表示されます。</p>
+</body>
+</html>
