@@ -2,6 +2,27 @@
 <html>
 <head>
     <title>Confirm Before Leaving</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ビューポート設定を追加 -->
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        input[type="text"] {
+            width: 100%; /* 入力フィールドを幅いっぱいに表示 */
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box; /* パディングとボーダーを幅に含める */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* モバイルデバイス用のフォントサイズ調整 */
+        @media (max-width: 600px) {
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
     <script type="text/javascript">
         // ユーザーのインタラクションがあったかどうかを追跡するフラグ
         let hasUserInteracted = false;
