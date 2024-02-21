@@ -8,34 +8,28 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             // フォームの入力フィールドにイベントリスナーを追加
-            var formInputs = document.querySelectorAll('input, textarea');
-            for (var i = 0; i < formInputs.length; i++) {
-                formInputs[i].addEventListener('input', function() {
-                    // ユーザーが入力を始めたらフラグをtrueに設定
-                    hasUserInteracted = true;
-                });
-            }
+            var inputField = document.querySelector('input');
+            inputField.addEventListener('input', function() {
+                // ユーザーが入力を始めたらフラグをtrueに設定して、beforeunloadイベントリスナーを追加
+                hasUserInteracted = true;
+                addBeforeUnloadListener();
+            });
         });
 
         function addBeforeUnloadListener() {
-            if (hasUserInteracted) {
-                // ユーザーのインタラクションがあった場合のみ、beforeunloadイベントリスナーを追加
-                window.addEventListener('beforeunload', function(e) {
-                    var confirmationMessage = 'このページを離れますか？';
-                    (e || window.event).returnValue = confirmationMessage;
-                    return confirmationMessage;
-                });
-            }
+            window.addEventListener('beforeunload', function(e) {
+                if (!hasUserInteracted) return; // ユーザーインタラクションがなければ何もしない
+                var confirmationMessage = '本当にこのページを離れますか？';
+                (e || window.event).returnValue = confirmationMessage; // 標準の確認メッセージを設定
+                return confirmationMessage;
+            });
         }
-
-        // ページ全体のクリックイベントでbeforeunloadイベントリスナーを追加する
-        window.addEventListener('click', addBeforeUnloadListener);
     </script>
 </head>
 <body>
-    <p>フォームに何か入力してください。その後、ページから離れようとすると確認ダイアログが表示されます。</p>
+    <p>下記のフォームに入力してください。その後、ページから離れようとすると、確認ダイアログが表示されます。</p>
     <form>
-        <input type="text" placeholder="ここに入力">
+        <input type="text" placeholder="ここに入力してください">
     </form>
 </body>
 </html>
